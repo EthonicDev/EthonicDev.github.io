@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ethonic's Portfolio</title>
+    <style>
+        .title {
+            text-align: center;
+            background-color: rgb(15, 15, 15);
+            padding: 0px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            color: rgb(255, 136, 0);
+            margin: 25px auto;
+            width: 35%;
+
+        }
+        body {
+            background-color: #181818;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        body::-webkit-scrollbar {
+          width: 0px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+
+          width: 0px;
+        }
+
+        ::-webkit-scrollbar {
+          width: 15px;
+          background-color: black;
+          padding: 20px;
+          border-radius: 10px;
+          margin: 10px auto;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background-color: rgb(34, 34, 34);
+          width: 10px;
+          padding: 20px;
+          border-radius: 10px;
+          margin: 10px auto;
+        }
+
+        h1 {
+            text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+            text-decoration-line: overline;
+            text-emphasis-color: rgb(0, 0, 0);
+            text-decoration: wavy;
+            color: rgb(0, 183, 255);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 10px auto;
+        }
+
+        .card {
+            background-color: rgb(15, 15, 15);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            color: white;
+            margin: 100px auto;
+        }
+
+        .card2 {
+          background-color: rgb(22, 22, 22);
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+          transition: all 0.2s ease-in-out;
+          color: white;
+          margin: 10px auto;
+      }
+      .card2:hover {
+        transform: scale(1.05);
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+      }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h2 {
+            animation: slide-in 0.5s forwards;
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        canvas {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .background-element {
+            position: absolute;
+            top: 10;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .link-color {
+          color: rgb(117, 188, 255);
+        }
+
+        .images {
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          width: 100%;
+          margin-bottom: var(--ytd-horizontal-list-margin-bottom,24px);
+          transition-duration: 0.15s;
+          transition-timing-function: cubic-bezier(0.05,0,0,1);
+          will-change: transform;
+          display: inline-block;
+          white-space: nowrap;
+        }
+
+          .images img {
+            width: 192px;
+            height: 108px;
+            margin: 10px;
+          }
+
+          .image-card {
+            background-color: rgb(22, 22, 22);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            color: white;
+        }
+
+        .image-card:hover {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+          .image-card:hover .images {
+            display: flex;
+            flex-wrap: wrap;
+            width: auto;
+            height: auto;
+          }
+
+          #bubbles {
+            filter: blur(25px);
+          }
+          .video-container {
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            margin-bottom: var(--ytd-horizontal-list-margin-bottom,24px);
+            transition-duration: 0.15s;
+            transition-timing-function: cubic-bezier(0.05,0,0,1);
+            will-change: transform;
+            display: inline-block;
+            white-space: nowrap;
+          }
+
+          .videos {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            margin-bottom: var(--ytd-horizontal-list-margin-bottom,24px);
+            transition-duration: 0.15s;
+            transition-timing-function: cubic-bezier(0.05,0,0,1);
+            will-change: transform;
+            display: inline-block;
+            white-space: nowrap;
+          }
+          .card-containertest {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0px;
+            margin: 0px auto;
+          }
+
+          .card3 {
+            width: 45%;
+            margin-bottom: 20px;
+            background-color: rgb(22, 22, 22);
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            color: white;
+            margin: 10px auto;
+            padding: 20px;
+          }
+
+          .card3:hover {
+            transform: scale(1.05);
+            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+          }
+          #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            scale: 1.1;
+            object-fit: cover;
+            pointer-events: none;
+            user-select: none;
+
+            filter: blur(0px);
+            -webkit-filter: blur(0px);
+          }
+    </style>
+</head>
+
+<body>
+  <canvas id="bubbles" width="1920" height="1080"></canvas>
+    <div class="background-element">
+      <video id="bg-video" muted playsinline>
+        <source src="bgv.mp4" type="video/mp4">
+      </video>
+        </div>
+        <div class="container">
+            <h1 class="title">Ethonic's Portfolio</h1>
+            <div class="card">
+                <h2>About Me</h2>
+                <p>Hello, Im Ethonic. I develop stuff online like my portal 2 mod that I'm working on. I really like making good looking graphic designs and effects. I am a beta tester for <a href="https://portal2communityedition.com/" class="link-color" target="_blank">Portal 2: Community Edition</a> which is a mod for portal: 2 that expands the capabilities of level creation and mod development. I also beta test for <a href="https://developer.valvesoftware.com/wiki/S&box" class="link-color" target="_blank">S&box</a> which is a game platform that was made in source 2 and created by the people who made <a href="https://gmod.facepunch.com/" class="link-color" target="_blank">Garry's Mod</a>. I am a 3d artist and I like modeling and texturing. Most textures I make are made fully procedural in blender which allows me to expand upon them later. I am a Nintendo fan and own both a WII and a WII U (both consoles are modded). You might sometimes see me play <a href="https://www.chadsoft.co.uk/" class="link-color" target="_blank">CTGP-R</a> or <a href="https://wiki.tockdom.com/wiki/Mario_Kart_Midnight" class="link-color" target="_blank">Mario Kart Midnight</a> which are mario kart mods that add many more tracks to play on. </p>
+            </div>
+            <div class="card">
+                <h2>My skills</h2>
+                  <div class="card2">
+                    <li><a href="https://developer.valvesoftware.com/wiki/Source" class="link-color" target="_blank">Source Engine</a></li>
+                  </div>
+                  <div class="card2">
+                    <li><a href="https://www.python.org/" class="link-color" target="_blank">Python</a></li>
+                  </div>
+                  <div class="card2">
+                    <li><a href="https://en.wikipedia.org/wiki/Digital_art" class="link-color" target="_blank">Digital Art</a></li>
+                  </div>
+            </div>
+            <div class="card">
+                <h2>My Work</h2>
+                <div class="card2">
+                    <h3>Galactic Aperture</h3>
+                    <p>This is a portal 2 mod made using P2CE with remade materials and new levels to play.
+                    Its old name was "Aperture pain"
+                    </p>
+                </div>
+                <div class="card2">
+                    <h3>Source II</h3>
+                    <p>Using S&box, I Am working on a Portal game Source 2 with Quanta Collective.</p>
+                </div>
+                <div class="image-card">
+                    <h3>Wallpapers</h3>
+                    <p>These are some wallpapers that I have made</p>
+                    <div class="images">
+                      <div class="video-container">
+                        <a href="portal2wallpaper1.png" target="_blank">
+                          <img src="portal2wallpaper1.png" alt="image 1">
+                        </a>
+                        <a href="halberd.png" target="_blank">
+                          <img src="halberd.png" alt="image 2">
+                        </a>
+                        <a href="ghost.png" target="_blank">
+                          <img src="ghost.png" alt="image 3">
+                        </a>
+                        <a href="pipes.png" target="_blank">
+                          <img src="pipes.png" alt="image 4">
+                        </a>
+                        <a href="volcanoglow.png" target="_blank">
+                          <img src="volcanoglow.png" alt="image 5">
+                      </a>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="card">
+                    <h3>Socials</h3>
+                    <div class="card2">
+                      <h3><a href="https://www.youtube.com/@ethonicyt" class="link-color" target="_blank">Youtube</a></h3>
+                      <div class="video-container">
+                      <div id="videos"></div>
+                    </div>
+                  </div>
+                  <div class="card-containertest">
+                    <div class="card3">
+                      <h3><a href="https://github.com/EthonicDev" class="link-color" target="_blank">Github</a></h3>
+                      <p>This is where post my code and some of my wallpapers that I make.</p>
+                    </div>
+                    <div class="card3">
+                      <h3><a href="https://steamcommunity.com/profiles/76561199072709155/" class="link-color" target="_blank">Steam</a></h3>
+                      <p>This is My steam account where I play most of my games.</p>
+                    </div>
+      </div>
+  </div>
+<script>
+
+  function adjustVideoFrame() {
+    const bgVideo = document.getElementById('bg-video');
+    const scrollPosition = window.scrollY;
+    const videoDuration = bgVideo.duration;
+    const windowHeight = window.innerHeight;
+    const totalHeight = document.body.offsetHeight - windowHeight;
+    const framePosition = (scrollPosition / totalHeight) * videoDuration;
+    bgVideo.currentTime = framePosition * 0.5 + 0;
+  }
+  setInterval(adjustVideoFrame, 100);
+
+    var channelID = "UCD0Dbu0nDRzoC9o5l864tig";
+    var apiKey = "AIzaSyBF6MZasNtise2DtM7o3J9EVuU6VCmXG4c";
+    var maxResults = 10;
+    var url = "https://www.googleapis.com/youtube/v3/search?key=" + apiKey +
+              "&channelId=" + channelID +
+              "&part=snippet,id&order=date&maxResults=" + maxResults;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        var videos = data.items;
+        var html = "";
+        for (var i = 0; i < videos.length; i++) {
+          var video = videos[i];
+          html += "<iframe width='280' height='157' src='https://www.youtube.com/embed/" +
+                  video.id.videoId + "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+        }
+        document.getElementById("videos").innerHTML = html;
+      });
+
+      var canvas = document.getElementById("bubbles");
+      var ctx = canvas.getContext("2d");
+      var bubbles = [];
+
+      for (var i = 0; i < 50; i++) {
+          var x = Math.random() * canvas.width;
+          var y = Math.random() * canvas.height;
+          var radius = Math.random() * 30 + 80;
+          var xSpeed = Math.random() * 2 - 1;
+          var ySpeed = Math.random() * 2 - 1;
+          bubbles.push({x: x, y: y, radius: radius, xSpeed: xSpeed, ySpeed: ySpeed});
+      }
+
+      var grid = {
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          size: 20,
+          speed: 0.0005,
+          angle: 0
+      };
+      var maskCanvas = document.createElement("canvas");
+      maskCanvas.width = canvas.width;
+      maskCanvas.height = canvas.height;
+      var maskCtx = maskCanvas.getContext("2d");
+
+      function drawBubbles() {
+          maskCtx.clearRect(0, 0, canvas.width, canvas.height);
+          maskCtx.beginPath();
+          for (var i = 0; i < bubbles.length; i++) {
+              var bubble = bubbles[i];
+              maskCtx.moveTo(bubble.x + bubble.radius, bubble.y);
+              maskCtx.arc(bubble.x, bubble.y, bubble.radius, 0, 2 * Math.PI);
+              bubble.x += bubble.xSpeed;
+              bubble.y += bubble.ySpeed;
+              if (bubble.x + bubble.radius > canvas.width || bubble.x - bubble.radius < 0) {
+                  bubble.xSpeed = -bubble.xSpeed;
+              }
+              if (bubble.y + bubble.radius > canvas.height || bubble.y - bubble.radius < 0) {
+                  bubble.ySpeed = -bubble.ySpeed;
+              }
+          }
+          maskCtx.fill();
+      }
+
+      function animate() {
+          requestAnimationFrame(animate);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          ctx.save();
+          ctx.strokeStyle = "#1D1D1D";
+          ctx.translate(grid.x, grid.y);
+          ctx.rotate(grid.angle);
+          for (var i = -canvas.width; i < canvas.width; i += grid.size) {
+              for (var j = -canvas.height; j < canvas.height; j += grid.size) {
+                  ctx.strokeRect(i, j, grid.size * 0.8, grid.size * 0.8);
+              }
+          }
+          grid.angle += grid.speed;
+          ctx.restore();
+          ctx.save();
+          ctx.globalCompositeOperation = "destination-in";
+          ctx.drawImage(maskCanvas, 0, 0);
+          ctx.restore();
+          // THIS ISAIFUHK8FAWG67IYWB
+          drawBubbles();
+      }
+      animate();
+    </script>
+</body>

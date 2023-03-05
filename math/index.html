@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ethonic's Calculator</title>
+	<link href="font.css" rel="stylesheet">
+</head>
+	<style>
+		body {
+			background-color: #000000; /*DARK MODE IS COL*/
+			font-family: Arial, sans-serif;
+		  }
+		.grid-container {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-gap: 10px;
+			width: 70%;
+			margin: 0 auto;
+		  }
+		  
+	.grid-item {
+		background-color: rgb(22, 22, 22);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.2s ease-in-out;
+    	color: white;
+        margin: 20px auto;
+		width: 90%;
+		
+	  }
+	  .calbutton {
+		background-color: rgb(22, 22, 22);
+        padding: 7px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.2s ease-in-out;
+    	color: rgb(186, 255, 197);
+        margin: 1px auto;
+		width: 10%;
+		text-align: center;
+		
+	}
+	.calarea {
+	  background-color: rgb(3, 87, 0);
+	  padding: 7px;
+	  border-radius: 10px;
+	  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+	  transition: all 0.2s ease-in-out;
+	  color: rgb(0, 0, 0);
+	  margin: 1px auto;
+	  width: 40%;
+	  text-align: center;
+	  }
+	  input {
+		border: 1px solid white;
+		background-color: #141414;
+		color: white;
+		padding: 10px;
+		font-size: 16px;
+		margin: 5px auto;
+		outline: none;
+		border-radius: 10px;
+	}
+
+
+
+	video {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: -1;
+		filter: blur(0px);
+		-webkit-filter: blur(0px);
+	  }
+
+
+	  		
+	  input[type=checkbox]:checked + label {
+		background-color: #00ff15;
+		border-color: #00ff0d;
+		color: #000000;
+	  }
+	</style>
+	<script>
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////bozo
+
+		function calculatecircle() {
+			// dont delete this it is important
+			var radius = parseFloat(document.getElementById("radius").value);
+			var circumference = parseFloat(document.getElementById("circumference").value);
+			var diameter = parseFloat(document.getElementById("diameter").value);
+			var area = parseFloat(document.getElementById("area").value);
+			var useSimplePi = document.getElementById("simple-pi").checked;
+
+
+			var pi = useSimplePi ? 3.14 : Math.PI;
+			if (!isNaN(radius)) {
+				circumference = 2 * pi * radius;
+				diameter = 2 * radius;
+				area = pi * radius * radius;
+			} else if (!isNaN(circumference)) {
+				radius = circumference / (2 * pi);
+				diameter = 2 * radius;
+				area = pi * radius * radius;
+			} else if (!isNaN(diameter)) {
+				radius = diameter / 2;
+				circumference = 2 * pi * radius;
+				area = pi * radius * radius;
+			} else if (!isNaN(area)) {
+				radius = Math.sqrt(area / pi);
+				diameter = 2 * radius;
+				circumference = 2 * pi * radius;
+			}
+
+			document.getElementById("radius").value = radius;
+			document.getElementById("circumference").value = circumference;
+			document.getElementById("diameter").value = diameter;
+			document.getElementById("area").value = area;
+		}
+
+		// simpler stuff
+		document.getElementById("simple-pi").addEventListener("change", function() {
+			calculatecircle();
+		});
+
+		/////////////////////////////////////////////////////////////////////////////////////
+
+		function calculateparArea() {
+			// variables afgosuhg8oahrui8egyh
+			var base1 = parseFloat(document.getElementById("base1").value);
+			var base2 = parseFloat(document.getElementById("base2").value);
+			var height = parseFloat(document.getElementById("height").value);
+
+			var area = (base1 + base2) * height / 2;
+
+			// this display
+			document.getElementById("result").innerHTML = "The area of the parallelogram is " + area + ".";
+		  }
+
+
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		function calculatetri() {
+			var heighttri = parseFloat(document.getElementById("heighttri").value);
+			var widthtri = parseFloat(document.getElementById("widthtri").value);
+			var areatri = parseFloat(document.getElementById("areatri").value);
+		
+			if (heighttri && widthtri) {
+				areatri = heighttri * widthtri / 2;
+				document.getElementById("areatri").value = areatri;
+			} else if (heighttri && areatri) {
+				widthtri = 2 * areatri / heighttri;
+				document.getElementById("widthtri").value = widthtri;
+			} else if (widthtri && areatri) {
+				heighttri = 2 * areatri / widthtri;
+				document.getElementById("heighttri").value = heighttri;
+			}
+		}
+	</script>
+
+<body>
+	<video autoplay muted loop>
+		<source src="bg.mp4" type="video/mp4">
+	</video>
+	<div class="grid-container">
+		<div class="grid-item">
+			<h1>Simple Calculator</h1>
+			<p>Calculate Stuff</p>
+			<form>
+				<input class="calarea" type="text" id="result" readonly>
+				<br>
+				<input type="button" class="calbutton" value="7" onclick="addDigit('7')">
+				<input type="button" class="calbutton" value="8" onclick="addDigit('8')">
+				<input type="button" class="calbutton" value="9" onclick="addDigit('9')">
+				<input type="button" class="calbutton" value="+" onclick="addOperator('+')">
+				<br>
+				<input type="button" class="calbutton" value="4" onclick="addDigit('4')">
+				<input type="button" class="calbutton" value="5" onclick="addDigit('5')">
+				<input type="button" class="calbutton" value="6" onclick="addDigit('6')">
+				<input type="button" class="calbutton" value="-" onclick="addOperator('-')">
+				<br>
+				<input type="button" class="calbutton" value="1" onclick="addDigit('1')">
+				<input type="button" class="calbutton" value="2" onclick="addDigit('2')">
+				<input type="button" class="calbutton" value="3" onclick="addDigit('3')">
+				<input type="button" class="calbutton" value="*" onclick="addOperator('*')">
+				<br>
+				<input type="button" class="calbutton" value="0" onclick="addDigit('0')">
+				<input type="button" class="calbutton" value="." onclick="addDecimal()">
+				<input type="button" class="calbutton" value="=" onclick="calculate()">
+				<input type="button" class="calbutton" value="/" onclick="addOperator('/')">
+				<br>
+				<input type="button" class="calbutton" value="Clear" onclick="clearResult()">
+				<input type="button" class="calbutton" value="π" onclick="addPi()">
+			</form>
+			<script>
+				let currentNumber = '0';
+				let currentOperator = '';
+				let previousNumber = '0';
+				let isResultCalculated = false;
+				const result = document.getElementById('result');
+			
+				function addDigit(digit) {
+					if (isResultCalculated) {
+						currentNumber = digit;
+						isResultCalculated = false;
+					} else {
+						currentNumber += digit;
+					}
+					result.value = currentNumber;
+				}
+			
+				function addDecimal() {
+					if (!currentNumber.includes('.')) {
+						currentNumber += '.';
+						result.value = currentNumber;
+					}
+				}
+			
+				function addOperator(operator) {
+					if (isResultCalculated) {
+						isResultCalculated = false;
+					}
+					if (currentOperator !== '') {
+						calculate();
+					}
+					currentOperator = operator;
+					previousNumber = currentNumber;
+					currentNumber = '0';
+				}
+			
+				function addPi() {
+					currentNumber = Math.PI.toString();
+					result.value = currentNumber;
+				}
+			
+				function calculate() {
+					if (isResultCalculated) {
+						return;
+					}
+					let resultNumber;
+					switch (currentOperator) {
+						case '+':
+							resultNumber = parseFloat(previousNumber) + parseFloat(currentNumber);
+							break;
+						case '-':
+							resultNumber = parseFloat(previousNumber) - parseFloat(currentNumber);
+							break;
+						case '*':
+							resultNumber = parseFloat(previousNumber) * parseFloat(currentNumber);
+							break;
+						case '/':
+							resultNumber = parseFloat(previousNumber) / parseFloat(currentNumber);
+							break;
+						default:
+							resultNumber = parseFloat(currentNumber);
+					}
+					result.value = resultNumber;
+					isResultCalculated = true;
+					currentNumber = resultNumber.toString();
+					currentOperator = '';
+					previousNumber = '0';
+				}
+			
+				function clearResult() {
+					result.value = '0';
+					currentNumber = '0';
+					currentOperator = '';
+					previousNumber = '0';
+					isResultCalculated = false;
+				}
+			</script>
+		</div>
+		<div class="grid-item">
+	<h1>Circle Calculator</h1>
+	<p>Enter the values for any two fields and the remaining fields will be calculated automatically.</p>
+	<form>
+		<label for="radius">Radius:</label>
+		<input type="number" id="radius" oninput="calculatecircle()">
+		<br>
+		<label for="circumference">Circumference:</label>
+		<input type="number" id="circumference" oninput="calculatecircle()">
+		<br>
+		<label for="diameter">Diameter:</label>
+		<input type="number" id="diameter" oninput="calculatecircle()">
+		<br>
+		<label for="area">Area:</label>
+		<input type="number" id="area" oninput="calculatecircle()">
+		<br>
+		<label for="simple-pi">Use simple value of pi (3.14)</label>
+		<input type="checkbox" id="simple-pi">
+
+		</div>
+		<div class="grid-item">
+    <h1>Parallelogram Area Calculator</h1>
+    <p>Please enter the values of base1, base2, and height:</p>
+    <form>
+      <label for="base1">Base 1:</label>
+      <input type="number" id="base1" name="base1">
+	  <br>
+      <label for="base2">Base 2:</label>
+      <input type="number" id="base2" name="base2">
+	  <br>
+      <label for="height">Height:</label>
+      <input type="number" id="height" name="height">
+	  <br>
+      <input type="button" value="Calculate" onclick="calculateparArea()">
+	  <p id="result"></p>
+	</form>
+    <p id="result"></p>
+		</div>
+		<div class="grid-item">
+			<h1>Triangle Calculator</h1>
+			<label for="height">Height:</label>
+			<input type="number" id="heighttri"><br>
+			<label for="width">Width:</label>
+			<input type="number" id="widthtri"><br>
+			<label for="area">Area:</label>
+			<input type="number" id="areatri"><br>
+			<input type="button" value="Calculate" onclick="calculatetri()">
+		</div>
+		</div>
+	  </div>
+
+</body>
+
+</html>

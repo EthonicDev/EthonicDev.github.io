@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Segment';
+    src: url('segment.ttf') format('truetype');
+  }
+  
+  #result {
+    font-family: 'Segment', sans-serif;
+  }
+  
+  input[type="button"] {
+    font-family: sans-serif;
+  }
