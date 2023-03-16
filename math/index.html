@@ -123,23 +123,29 @@
 		}
 
 		// simpler stuff
-		document.getElementById("simple-pi").addEventListener("change", function() {
-			calculatecircle();
-		});
+		window.onload = function() {
+			document.getElementById("simple-pi").addEventListener("change", function() {
+			  calculatecircle();
+			});
+		  }
 
 		/////////////////////////////////////////////////////////////////////////////////////
-
-		function calculateparArea() {
+		
+		function calculatepararea() {
 			// variables afgosuhg8oahrui8egyh
 			var base1 = parseFloat(document.getElementById("base1").value);
 			var base2 = parseFloat(document.getElementById("base2").value);
 			var height = parseFloat(document.getElementById("height").value);
-
+		
 			var area = (base1 + base2) * height / 2;
-
-			// this display
+		
+			// turi ip ip 154.134.4.1
 			document.getElementById("result").innerHTML = "The area of the parallelogram is " + area + ".";
-		  }
+			
+			// wenameshuinasuma wenahabeasoun
+		}
+		
+		// baaaaaaaaaaaaaaa
 
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,6 +167,51 @@
 				document.getElementById("heighttri").value = heighttri;
 			}
 		}
+
+
+
+
+		//////////////////////////////////////////////////////////////////////////////////
+
+
+		function calculatecube() {
+			let faceLength = parseFloat(document.getElementById("face-length").value);
+			let faceArea = parseFloat(document.getElementById("face-area").value);
+			let surfaceArea = parseFloat(document.getElementById("surface-area").value);
+			let volume = parseFloat(document.getElementById("volume").value);
+		  
+			if (!isNaN(faceLength)) {
+			  faceArea = faceLength * faceLength;
+			  surfaceArea = 6 * faceArea;
+			  volume = faceLength * faceLength * faceLength;
+			  document.getElementById("face-area").value = faceArea;
+			  document.getElementById("surface-area").value = surfaceArea;
+			  document.getElementById("volume").value = volume;
+			} else if (!isNaN(faceArea)) {
+			  faceLength = Math.sqrt(faceArea);
+			  surfaceArea = 6 * faceArea;
+			  volume = faceLength * faceLength * faceLength;
+			  document.getElementById("face-length").value = faceLength;
+			  document.getElementById("surface-area").value = surfaceArea;
+			  document.getElementById("volume").value = volume;
+			} else if (!isNaN(surfaceArea)) {
+			  faceArea = surfaceArea / 6;
+			  faceLength = Math.sqrt(faceArea);
+			  volume = faceLength * faceLength * faceLength;
+			  document.getElementById("face-length").value = faceLength;
+			  document.getElementById("face-area").value = faceArea;
+			  document.getElementById("volume").value = volume;
+			} else if (!isNaN(volume)) {
+			  faceLength = Math.pow(volume, 1 / 3);
+			  faceArea = faceLength * faceLength;
+			  surfaceArea = 6 * faceArea;
+			  document.getElementById("face-length").value = faceLength;
+			  document.getElementById("face-area").value = faceArea;
+			  document.getElementById("surface-area").value = surfaceArea;
+			}
+		  }
+		  
+		  
 	</script>
 
 <body>
@@ -291,12 +342,13 @@
 		<label for="area">Area:</label>
 		<input type="number" id="area" oninput="calculatecircle()">
 		<br>
-		<label for="simple-pi">Use simple value of pi (3.14)</label>
 		<input type="checkbox" id="simple-pi">
+		<label for="simple-pi">Use simple pi (3.14)</label>
 
 		</div>
 		<div class="grid-item">
     <h1>Parallelogram Area Calculator</h1>
+	<h1>(Under Maintanence)</h1>
     <p>Please enter the values of base1, base2, and height:</p>
     <form>
       <label for="base1">Base 1:</label>
@@ -308,7 +360,8 @@
       <label for="height">Height:</label>
       <input type="number" id="height" name="height">
 	  <br>
-      <input type="button" value="Calculate" onclick="calculateparArea()">
+      <input type="button" value="Calculate" onclick="calculatepararea()">
+
 	  <p id="result"></p>
 	</form>
     <p id="result"></p>
@@ -323,9 +376,25 @@
 			<input type="number" id="areatri"><br>
 			<input type="button" value="Calculate" onclick="calculatetri()">
 		</div>
+		<div class="grid-item">
+			<h1>Cube Calculator</h1>
+			<p>Enter the values for any two fields and the remaining fields will be calculated automatically.</p>
+			<form>
+			<label for="face-length">Face Length:</label>
+			<input type="number" id="face-length" oninput="calculatecube()">
+			<br>
+			<label for="face-area">Face Area:</label>
+			<input type="number" id="face-area" oninput="calculatecube()">
+			<br>
+			<label for="surface-area">Surface Area:</label>
+			<input type="number" id="surface-area" oninput="calculatecube()">
+			<br>
+			<label for="volume">Volume:</label>
+			<input type="number" id="volume" oninput="calculatecube()">
+			<br>
+			</form>
+
 		</div>
 	  </div>
-
 </body>
-
 </html>
