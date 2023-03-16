@@ -96,10 +96,16 @@
                 <h3>Portfolio</h3>
                 <p>This is my portfolio with information on skills and other details.</p>
             </div>
+            <div class="cardb" id="cardbutton3">
+              <h3>Html Editor</h3>
+              <p>This is a previewer for html</p>
+          </div>
         </div>
     </div>
 </body>
     <script>
+      //var video = document.getElementsByTagName('video')[0];
+      //video.playbackRate = 0.5;
 
         const myDiv = document.getElementById('cardbutton1');
         myDiv.addEventListener('click', () => {
@@ -109,6 +115,11 @@
         myDiv2.addEventListener('click', () => {
           window.location.href = 'portfolio/index.html';
         });
+        const myDiv3 = document.getElementById('cardbutton3');
+        myDiv3.addEventListener('click', () => {
+          window.location.href = 'code/html/index.html';
+        });
+
 
 
       let audio = document.getElementById('audio');
@@ -117,15 +128,15 @@
       document.addEventListener('keydown', function(event) {
         if (event.repeat) return;
         if (event.keyCode === 49) { //1
-          playSound('d.wav', 293.66, 0.5); //D4
+          playSound('D.wav', 293.66, 0.5); //D4
         } else if (event.keyCode === 50) { //2
-          playSound('f.wav', 349.23, 0.5); //F4
+          playSound('F.wav', 349.23, 0.5); //F4
         } else if (event.keyCode === 51) { // 3
-          playSound('a.wav', 440.00, 0.75); //A4
+          playSound('A.wav', 440.00, 0.75); //A4
         } else if (event.keyCode === 52) { //4
-          playSound('b.wav', 493.88, 0.75); //B4
+          playSound('B.wav', 493.88, 0.75); //B4
         } else if (event.keyCode === 53) { //5
-          playSound('d2.wav', 587.33, 0.5); //D5
+          playSound('D2.wav', 587.33, 0.5); //D5
         }
       });
 
