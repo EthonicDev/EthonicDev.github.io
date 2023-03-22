@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Ethonic's site</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    
   </head>
   <style>
     body {
@@ -75,8 +76,62 @@
         transform: scale(1.4);
         z-index: 2;
       }
+
+      
+      #popup {
+        color:rgba(255, 255, 255);
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        opacity: 1;
+        padding: 70px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+        background: transparent;
+        backdrop-filter: blur(50px);
+      }
+
+      #popup button {
+        border: 1px solid white;
+        background-color: #141414;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        margin: 5px auto;
+        outline: none;
+        border-radius: 10px;  
+      }
+      
+      .popup-open {
+        overflow: hidden;
+      }
+      
+      .poptext {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(22, 22, 22);
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0);
+        z-index: 999;
+        border-radius: 10px;
+      }
 </style>
 <body>
+  <div id="popup">
+    <div class="poptext">
+      <h1>Disclaimer</h1>
+      <p>This website is a school project and does not contain any games. The user is responsible with any misuse/abuse of the html code viewer. You can view the source code for this project at <a href="https://github.com/EthonicDev/EthonicDev.github.io" class="link-color" target="_blank">github.com/EthonicDev/EthonicDev.github.io</a></p>
+      <button id="close-popup">Close</button>
+    </div>
+  </div>
     <audio id="audio" src="" type="audio/wav"></audio>
     <video autoplay muted loop>
 	    <source src="bg.mp4" type="video/mp4">
@@ -98,12 +153,30 @@
             </div>
             <div class="cardb" id="cardbutton3">
               <h3>Html Editor</h3>
-              <p>This is a previewer for html</p>
+              <p>This is a previewer for html code</p>
           </div>
         </div>
     </div>
-</body>
+  </body>
     <script>
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var popup = document.getElementById('popup');
+        var closeButton = document.getElementById('close-popup');
+        var body = document.body;
+      
+        popup.style.display = 'block';
+        body.classList.add('popup-open');
+      
+        closeButton.addEventListener('click', function() {
+          popup.style.display = 'none';
+          body.classList.remove('popup-open');
+        });
+      });
+      
+      
+
       //var video = document.getElementsByTagName('video')[0];
       //video.playbackRate = 0.5;
 
@@ -128,15 +201,15 @@
       document.addEventListener('keydown', function(event) {
         if (event.repeat) return;
         if (event.keyCode === 49) { //1
-          playSound('D.wav', 293.66, 0.5); //D4
+          playSound('D.wav'); //D4
         } else if (event.keyCode === 50) { //2
-          playSound('F.wav', 349.23, 0.5); //F4
+          playSound('F.wav'); //F4
         } else if (event.keyCode === 51) { // 3
-          playSound('A.wav', 440.00, 0.75); //A4
+          playSound('A.wav'); //A4
         } else if (event.keyCode === 52) { //4
-          playSound('B.wav', 493.88, 0.75); //B4
+          playSound('B.wav'); //B4
         } else if (event.keyCode === 53) { //5
-          playSound('D2.wav', 587.33, 0.5); //D5
+          playSound('D2.wav'); //D5
         }
       });
 
