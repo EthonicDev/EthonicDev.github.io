@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Maze Image Processing</title>
+  <style>
+    .maze {
+      width: 256px;
+      height: 256px;
+      display: grid;
+      grid-template-columns: repeat(16, 1fr);
+    }
+
+    .maze-cell {
+      border: 1px solid black;
+      background-color: white;
+    }
+  </style>
+  <script>
+    function generateMaze() {
+      var mazeContainer = document.getElementById("mazeContainer");
+
+      mazeContainer.innerHTML = "";
+
+      for (var i = 0; i < 16; i++) {
+        for (var j = 0; j < 16; j++) {
+          var cell = document.createElement("div");
+          cell.classList.add("maze-cell");
+
+          if (Math.random() < 0.3) {
+            cell.style.backgroundColor = "black";
+          }
+
+          mazeContainer.appendChild(cell);
+        }
+      }
+    }
+
+    function processMaze() {
+      var mazeCells = document.getElementsByClassName("maze-cell");
+      var canvas = document.createElement("canvas");
+      var context = canvas.getContext("2d");
+
+      // Set16x16
+      canvas.width = 16;
+      canvas.height = 16;
+
+
+      for (var i = 0; i < mazeCells.length; i++) {
+        var cell = mazeCells[i];
+        var x = i % 16;
+        var y = Math.floor(i / 16);
+
+        context.fillStyle = cell.style.backgroundColor;
+        context.fillRect(x, y, 1, 1);
+      }
+
+
+      var imageData = context.getImageData(0, 0, 16, 16);
+      var pixels = imageData.data;
+
+
+      var output = "";
+      for (var i = 0; i < pixels.length; i += 4) {
+        if (i > 0 && i % (16 * 4) === 0) {
+          output += "\n";
+        }
+        output += "(" + pixels[i] + ")";
+      }
+
+      // Save
+      var link = document.createElement("a");
+      link.href = "data:text/plain;charset=utf-8," + encodeURIComponent(output);
+      link.download = "output.txt";
+      link.click();
+    }
+  </script>
+</head>
+<body>
+  <button onclick="generateMaze()">Generate Maze</button><br>
+  <div id="mazeContainer" class="maze"></div><br>
+  <button onclick="processMaze()">Process Maze</button>
+</body>
+</html>

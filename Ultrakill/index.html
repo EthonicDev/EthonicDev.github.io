@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Website</title>
+  <style>
+    @font-face {
+        font-family: "MyCustomFont";
+        src: url("font.ttf") format("truetype");
+      }
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #000000;
+      color:#ffffff;
+      font-size: 20px;
+      font-family: MyCustomFont;
+    }
+
+    .container {
+      position: relative;
+      text-align: center;
+      height:90%;
+      width:50%;
+      font-family: MyCustomFont;
+    }
+
+    .image-overlay {
+        width: 75%;
+        margin-top: 10%;
+        margin-bottom: 2%;
+    }
+
+    .button {
+        width:35%;
+      padding: 1% 2%;
+      margin-left: 15%;
+      margin-right: 15%;
+      margin-top: 5%;
+      font-size: 25px;
+      color: #fff;
+      background-color: #000000;
+      border: 2px solid #ffffff;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: MyCustomFont;
+    }
+    .button:hover {
+        border: 2px solid red;
+      }
+  </style>
+  <link href="font.ttf" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="container">
+    <img class="image-overlay" src="logo.webp" alt="Image Overlay">
+    <div>Ethonic's Cyber Grind Tools</div>
+    <button class="button" onclick="window.location.href = 'ImageToCyberGrind/index.html';">Image To CyberGrind</button>
+    <button class="button" onclick="window.location.href = 'index.html';">COMING SOON</button>
+  </div>
+</body>
+</html>

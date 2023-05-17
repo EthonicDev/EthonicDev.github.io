@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Processing</title>
+  <script>
+    function processImage() {
+      var inputImage = document.getElementById("inputImage");
+      var canvas = document.createElement("canvas");
+      var context = canvas.getContext("2d");
+
+      canvas.width = 16;
+      canvas.height = 16;
+
+      var img = new Image();
+
+      // draw
+      img.onload = function() {
+        context.drawImage(img, 0, 0, 16, 16);
+
+        // pixel data
+        var imageData = context.getImageData(0, 0, 16, 16);
+        var pixels = imageData.data;
+
+        // PREFABS
+        var cube = [];
+        for (var row = 0; row < 16; row++) {
+          var rowLetters = "";
+          for (var col = 0; col < 16; col++) {
+            var letter = "0"; // empty
+            var rand = Math.random();
+            if (rand < 0.02) {
+              letter = "H"; // 1-2% boss
+            } else if (rand < 0.1) {
+              letter = "s"; // 2-10% stairs
+            } else if (rand < 0.3) {
+              letter = "n"; // 10-30% enemy
+            } else if (rand < 0.35) {
+              letter = "p"; // 30-35% range enemy
+            } else if (rand < 0.4) {
+              letter = "J"; // 35-40% jump pad
+            }
+            rowLetters += letter;
+          }
+          cube.push(rowLetters);
+        }
+
+
+        var inputValue = document.getElementById("inputValue").value;
+        var multiplyFactor = parseFloat(inputValue);
+
+
+        for (var i = 0; i < pixels.length; i += 4) {
+          var r = pixels[i];
+          var g = pixels[i + 1];
+          var b = pixels[i + 2];
+          var gray = (r + g + b) / 3;
+          var newValue = Math.round(gray * multiplyFactor); // rounding lol
+
+          pixels[i] = newValue;
+          pixels[i + 1] = newValue;
+          pixels[i + 2] = newValue;
+        }
+
+
+        //file
+        var output = "";
+        for (var i = 0; i < pixels.length; i += 4) {
+          if (i > 0 && i % (16 * 4) === 0) {
+            output += "\n";
+          }
+          output += "(" + pixels[i] + ")";
+        }
+        output += "\n\n" + cube.join("\n");
+
+        // log
+        console.log(output);
+
+        // save
+        var link = document.createElement("a");
+        link.href = "data:text/plain;charset=utf-8," + encodeURIComponent(output);
+        link.download = "output.cgp";
+        link.click();
+      };
+
+      //source
+      img.src = URL.createObjectURL(inputImage.files[0]);
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <img class="image-overlay" src="../logo.webp" alt="Image Overlay">
+    <div class="text111">
+      <h2>Image to Cyber Grind</h2>
+        This is a tool for converting an image into an ULTRAKILL Cyber Grind Layout.
+    </div>
+    <input class="button" type="file" id="inputImage" accept="image/*"><br>
+    <div >Multiply height by: <input class="button" type="number" id="inputValue" value="1"><br></div>
+    <button  class="button" onclick="processImage()">Process Image</button>
+  </div>
+</body>
+<style>
+  @font-face {
+    font-family: "MyCustomFont";
+    src: url("../font.ttf") format("truetype");
+  }
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #000000;
+  color:#ffffff;
+  font-size: 20px;
+  font-family: MyCustomFont;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  align-items: center;
+  height:90%;
+  width:50%;
+  font-family: MyCustomFont;
+}
+
+.image-overlay {
+    width: 75%;
+    margin-top: 10%;
+    margin-bottom: 2%;
+}
+.file-input {
+  font-family: MyCustomFont;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+}
+.button {
+    width:50%;
+  padding: 1% 2%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  font-size: 20px;
+  color: #fff;
+  background-color: #000000;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: MyCustomFont;
+}
+.text111 {
+  width:50%;
+padding: 1% 2%;
+margin-left: 23%;
+margin-right: 23%;
+margin-top: 2.5%;
+margin-bottom: 2.5%;
+font-size: 20px;
+color: #fff;
+border-radius: 5px;
+cursor: pointer;
+font-family: MyCustomFont;
+}
+.button:hover {
+    border: 2px solid red;
+  }
+</style>
+</html>

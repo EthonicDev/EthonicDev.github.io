@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Resizable and Movable Windows</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+        .window {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 300px;
+            height: 200px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            resize: both;
+            overflow: auto;
+        }
+        .window .title-bar {
+            background-color: #ddd;
+            height: 30px;
+            padding: 5px;
+            cursor: move;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            box-sizing: border-box;
+        }
+        .window .title-bar .close-button {
+            position: absolute;
+            top: 5px;
+            right: 30px;
+            cursor: pointer;
+        }
+        .window .title-bar .fullscreen-button {
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            cursor: pointer;
+        }
+        .content {
+            padding-top: 30px;
+        }
+        #taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #f2f2f2;
+            border-top: 1px solid #ccc;
+            display: none;
+        }
+        #taskbar-list {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100%;
+            padding-left: 20px;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+        .taskbar-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 0 15px;
+            border: none;
+            background-color: transparent;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .taskbar-button:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div class="window">
+    <div class="title-bar">
+        <span class="title">Window Title</span>
+        <span class="close-button">X</span>
+        <span class="fullscreen-button">&#x2197;</span>
+    </div>
+    <div class="content">
+        <p>This is the content of the window.</p>
+    </div>
+</div>
+<div id="taskbar">
+    <ul id="taskbar-list"></ul>
+</div>
+<script>
+    window.addEventListener("load", function() {
+        var windows = document.querySelectorAll(".window");
+        for (var i = 0; i < windows.length; i++) {
+            makeMovable(windows[i]);
+            makeResizable(windows[i]);
+            makeCloseable(windows[i]);
+            makeFullscreen(windows[i]);
+        }
+    });
+
+    function makeMovable(window) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        var header = window.querySelector(".title-bar");
+        header.addEventListener("mousedown", dragMouseDown);
+      
+        function dragMouseDown(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.addEventListener("mouseup", closeDragElement);
+          document.addEventListener("mousemove", elementDrag);
+        }
+      
+        function elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          window.style.top = (window.offsetTop - pos2) + "px";
+          window.style.left = (window.offsetLeft - pos1) + "px";
+        }
+      
+        function closeDragElement() {
+          document.removeEventListener("mouseup", closeDragElement);
+          document.removeEventListener("mousemove", elementDrag);
+        }
+      }
+      
+      function makeResizable(window) {
+        var handle = window.querySelector(".window-resize-handle");
+        handle.addEventListener("mousedown", initResize, false);
+      
+        function initResize(e) {
+          e.preventDefault();
+          window.addEventListener("mousemove", doResize, false);
+          window.addEventListener("mouseup", stopResize, false);
+        }
+      
+        function doResize(e) {
+          window.style.width = (e.clientX - window.offsetLeft) + "px";
+          window.style.height = (e.clientY - window.offsetTop) + "px";
+        }
+      
+        function stopResize() {
+          window.removeEventListener("mousemove", doResize, false);
+          window.removeEventListener("mouseup", stopResize, false);
+        }
+      }
+      
+      function makeCloseable(window) {
+        var closeBtn = window.querySelector(".window-close-btn");
+        closeBtn.addEventListener("click", function() {
+          window.style.display = "none";
+        });
+      }
+      
+      function makeFullscreen(window) {
+        var fullscreenBtn = window.querySelector(".window-fullscreen-btn");
+        fullscreenBtn.addEventListener("click", function() {
+          if (window.fullscreen) {
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+              document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) {
+              document.msExitFullscreen();
+            }
+            window.fullscreen = false;
+          } else {
+            if (window.requestFullscreen) {
+              window.requestFullscreen();
+            } else if (window.webkitRequestFullscreen) {
+              window.webkitRequestFullscreen();
+            } else if (window.mozRequestFullScreen) {
+              window.mozRequestFullScreen();
+            } else if (window.msRequestFullscreen) {
+              window.msRequestFullscreen();
+            }
+            window.fullscreen = true;
+          }
+        });
+      }
+      function makeFullscreen(window) {
+        var button = window.querySelector(".fullscreen-button");
+        button.addEventListener("click", function() {
+          if (!window.fullscreen) {
+            window.fullscreen = true;
+            window.classList.add("fullscreen");
+            button.innerText = "Exit Fullscreen";
+            document.documentElement.requestFullscreen();
+          } else {
+            window.fullscreen = false;
+            window.classList.remove("fullscreen");
+            button.innerText = "Fullscreen";
+            document.exitFullscreen();
+          }
+        });
+      }
+
+      function exitFullscreen(element) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+        element.setAttribute("data-fullscreen", "false");
+        window.fullscreen = false;
+      }
+      
+      function toggleFullscreen(element) {
+        if (window.fullscreen) {
+          exitFullscreen(element);
+        } else {
+          enterFullscreen(element);
+        }
+      }
+      
+      function makeFullscreen(window) {
+        var fullscreenButton = window.querySelector(".fullscreen-button");
+        fullscreenButton.addEventListener("click", function(event) {
+          event.preventDefault();
+          toggleFullscreen(window);
+        });
+      }
+      
+
+// Function to create a new window
+function createWindow(title, content) {
+var newWindow = document.createElement("div");
+newWindow.classList.add("window");
+
+var windowTitle = document.createElement("div");
+windowTitle.classList.add("window-title");
+
+var titleText = document.createElement("span");
+titleText.textContent = title;
+
+var closeButton = document.createElement("a");
+closeButton.classList.add("close-button");
+closeButton.innerHTML = "×";
+closeButton.addEventListener("click", function() {
+newWindow.parentNode.removeChild(newWindow);
+});
+
+var fullscreenButton = document.createElement("a");
+fullscreenButton.classList.add("fullscreen-button");
+fullscreenButton.innerHTML = "⛶";
+
+windowTitle.appendChild(titleText);
+windowTitle.appendChild(closeButton);
+windowTitle.appendChild(fullscreenButton);
+newWindow.appendChild(windowTitle);
+
+var windowContent = document.createElement("div");
+windowContent.classList.add("window-content");
+windowContent.innerHTML = content;
+newWindow.appendChild(windowContent);
+
+document.body.appendChild(newWindow);
+makeMovable(newWindow);
+makeResizable(newWindow);
+makeCloseable(newWindow);
+makeFullscreen(newWindow);
+
+return newWindow;
+}
+</script>
+</head>
+<body>
+	<div>
+		<div class="window">
+			<div class="title-bar">
+				Resizable and Movable Window
+				<div class="close-button">&#10006;</div>
+				<div class="fullscreen-button">&#9633;</div>
+			</div>
+			<div class="content">
+				<p>This is an example of a resizable and movable window with a lot of text for you to read and for me to test the functionality of the scrollbar. lets add even more text because why shouldetn i add more lol</p>
+			</div>
+		</div>
+
+
+		
+<div id="taskbar">
+  <ul id="taskbar-list">
+    <li><button class="taskbar-button">Window 1</button></li>
+    <li><button class="taskbar-button">Window 2</button></li>
+    <li><button class="taskbar-button">Window 3</button></li>
+  </ul>
+</div>
+</body>
+</html>

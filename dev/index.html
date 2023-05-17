@@ -1,143 +1,52 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <title>Ethonic's Secret Page</title>
+<html lang="en">
+    <head> 
+        <meta charset="UTF-8" />
+        <title>Video Game Main Menu</title> 
     <style>
         body {
-            background-color: #181818;
-            font-family: Arial, sans-serif;
-            position: relative;
-        }
-
-        h1 {
-            text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
-            text-decoration-line: overline;
-            text-emphasis-color: rgb(0, 0, 0);
-            text-decoration: wavy;
-            color: rgb(0, 183, 255);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background-color: rgb(15, 15, 15);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.2s ease-in-out;
-            color: white;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .card h2 {
-            animation: slide-in 0.5s forwards;
-        }
-
-        @keyframes slide-in {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        canvas {
-            width: 100vw;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-
-
-        .background-element {
-            position: absolute;
-            top: 10;
-            left: 0;
+            overflow: hidden; /* To prevent vertical scrolling */ 
+            margin: 0; }
+        #background {
             width: 100%;
-            height: 100%;
-            z-index: -1;
+            height: 100vh; /* Sets to full viewport height*/
+            position: fixed; /* Set it as a 'fullscreen window' */
+            z-index: -999; /* Putting this behind all elements, including our buttons! */
+            opacity: 1; /* This just makes sure things are visible */
+            display: flex; /* Make it work for centering horizontally/vertically */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Centers vertically */
         }
 
-        .link-color {
-            color: rgb(0, 183, 255);
-            text-decoration: none;
-          }
+        #main_menu {
+            background-color: black;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: inset 0px 0px 24px 3px rgba(0,0,0,0.6); /* Add some shadow below button */
+            transition: ease-in-out 0.2s; /* For nice animations when hovering over the button */
+        }
 
-          .link-color2 {
-            color: rgb(255, 255, 255);
-            text-decoration: none;
-          }
-
+        #main_menu:hover {
+            transform: translateY(-1rem); /* Flip up upon hovers */
+            box-shadow: inset 0px 0px 24px 3px rgba(0,0,0,0.7); /* Adjust shadow when flipping */
+        }
     </style>
 </head>
+<body> <!-- Our container -->
+    <div id="container">
 
-<body>
-    <canvas id="bubbles" width="1920" height="1080"></canvas>
-    <div class="background-element">
     </div>
-    <div class="container">
-        <h1>Ethonic's <a href="http://ethonic.ga/dev/cube" class="link-color" target="_blank">Secret</a> Page</h1>
-        <div class="card">
-            <h2>Wow</h2>
-            <p>This page is so random</p>
-        </div>
-        <div class="card">
-            <h2>oooo<a href="http://ethonic.ga/rtx/Babylon_Path_Tracing" class="link-color2" target="_blank">o</a></h2>
-            <div class="card">
-                <h3>It would be a shame</h3>
-                <p>If I were to hide something here</p>
-            </div>
-            <div class="card">
-                <h3>Too bad that</h3>
-                <p>I have no idea how to do that</p>
-            </div>
-        </div>
-    </div>
-    <script>
-        var canvas = document.getElementById("bubbles");
-        var ctx = canvas.getContext("2d");
-        var bubbles = [];
-
-        for (var i = 0; i < 50; i++) {
-            var x = Math.random() * canvas.width;
-            var y = Math.random() * canvas.height;
-            var radius = Math.random() * 30 + 80;
-            var xSpeed = Math.random() * 2 - 1;
-            var ySpeed = Math.random() * 2 - 1;
-            bubbles.push({x: x, y: y, radius: radius, xSpeed: xSpeed, ySpeed: ySpeed});
-        }
-
-        function animate() {
-          requestAnimationFrame(animate);
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          for (var i = 0; i < 2000; i++) {
-            var bubble = bubbles[i];
-            ctx.beginPath();
-            ctx.arc(bubble.x, bubble.y, bubble.radius, 2, 4 * Math.PI);
-            ctx.fillStyle = "#151515";
-            ctx.fill();
-            bubble.x += bubble.xSpeed;
-            bubble.y += bubble.ySpeed;
-            if (bubble.x + bubble.radius > canvas.width || bubble.x - bubble.radius < 0) {
-              bubble.xSpeed = -bubble.xSpeed;
-            }
-            if (bubble.y + bubble.radius > canvas.height || bubble.y - bubble.radius < 0) {
-              bubble.ySpeed = -bubble.ySpeed;
-            }
-          }
-        }
-
-        animate();
-    </script>
+    <!-- Buttons -->
+<button type="button" id="new_game" class="menuButton">New Game</button>
+<button type="button" id="options" class="menuButton">Options</button>
+	<button type="button" id="exit" class="menuButton">Exit</button>
+    
+<!-- Background video -->
+<video autoplay muted loop id="background">
+  <source src="https://media.w3.org/2010/05/bunny/movie.webm" type="video/webm">
+</video>
 </body>
+</html>

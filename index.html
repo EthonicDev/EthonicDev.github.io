@@ -1,286 +1,160 @@
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
     <meta charset="UTF-8">
-    <title>Ethonic's site</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    
-  </head>
-  <style>
-    body {
-        background-color: #181818;
-        font-family: Arial, sans-serif;
-        position: relative;
-        text-align: center;
-    }
-    .title {
-        text-align: center;
-        padding: 0px;
-        font-size: 500%;
-        padding: 1px;
-        border-radius: 10px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-        transition: all 0.2s ease-in-out;
-        color: white;
-        margin: 5% auto;
-        background: transparent;
-        backdrop-filter: blur(50px);
-    }
-    video {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		z-index: -1;
-		filter: blur(0px);
-		-webkit-filter: blur(0px);
-        z-index: -1;
-	  }
-    .container {
-        max-width: 1200px;
-        margin: 10px auto;
-    }
+    <title>Ethonic's Site</title>
+    <style>
+        body {
+            background-color: #000000;
+            font-family: Arial, sans-serif;
+            position: relative;
+            text-align: center;
+            color: #fff;
+        }
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        #my-video {
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .title {
 
-      .card {
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-        transition: all 0.2s ease-in-out;
-        color: white;
-        margin: 5px auto;
-        background: transparent;
-        backdrop-filter: blur(50px);
-        width: 94%;
-    }
-    .card-containertest {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding: 10px;
-        margin: 0px auto;
-      }
-      .cardb {
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-        transition: all 0.2s ease-in-out;
-        color: white;
-        margin: 5px auto;
-        background: transparent;
-        backdrop-filter: blur(50px);
-        width: 45%;
-      }
-      .cardb:hover {
-        transform: scale(1.4);
-        z-index: 2;
-      }
-
-      
-      #popup {
-        color:rgba(255, 255, 255);
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        opacity: 1;
-        padding: 70px;
-        text-align: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        z-index: 999;
-        background: transparent;
-        backdrop-filter: blur(50px);
-      }
-
-      #popup button {
-        border: 1px solid white;
-        background-color: #141414;
-        color: white;
-        padding: 10px;
-        font-size: 16px;
-        margin: 5px auto;
-        outline: none;
-        border-radius: 10px;  
-      }
-      
-      .popup-open {
-        overflow: hidden;
-      }
-      
-      .poptext {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgb(22, 22, 22);
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0);
-        z-index: 999;
-        border-radius: 10px;
-      }
-</style>
+            text-align: center;
+            width: 30%;
+            padding: 0px;
+            font-size: 100%;
+            padding: 1px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            color: white;
+            margin: 5% auto;
+            background: transparent;
+            backdrop-filter: blur(50px);
+        }
+        button {
+            z-index: 1;
+          }
+        #scroll-button {
+            width: 5%;
+            height: 5%;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 33%;
+            margin-bottom: 3%;
+          }
+        .item {
+            border-collapse: collapse;
+            width: 35%;
+            color: white;
+            border-radius: 3%;
+            margin: 2% auto;
+            padding: 1%;
+            background: transparent;
+            backdrop-filter: blur(50px);
+            display:block;
+          }
+          
+          a {
+            background-color: rgba(15, 15, 15, 0);
+            padding: 1%;
+            border-radius: 10px;
+            border-color: #fff;
+            border: 2px solid #fff;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            color: white;
+            margin: 19% auto;
+            offset-position: 50%;
+            font-size: 25px;
+          }
+          
+          ::-webkit-scrollbar {
+            width: 15px;
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px auto;
+          }
+  
+          ::-webkit-scrollbar-thumb {
+            background-color: rgb(34, 34, 34);
+            width: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px auto;
+          }
+        </style>
+    </head>
 <body>
-  <div id="popup">
-    <div class="poptext">
-      <h1>Disclaimer</h1>
-      <p>This website is a school project and does not contain any games. The user is responsible with any misuse/abuse of the html code viewer. You can view the source code for this project at <a href="https://github.com/EthonicDev/EthonicDev.github.io" class="link-color" target="_blank">github.com/EthonicDev/EthonicDev.github.io</a></p>
-      <button id="close-popup">Close</button>
-    </div>
-  </div>
-    <audio id="audio" src="" type="audio/wav"></audio>
-    <video autoplay muted loop>
+    <video id="myVideo" autoplay muted loop>
 	    <source src="bg.mp4" type="video/mp4">
 	</video>
-    <div class="container">
-        <h1 class="title">Ethonic's Website</h1>
-        <div class="card">
-            <p>This is a site I have created that showcases effects that I have made and display a portfolio with my skills and a math page that uses complex code to do math.</p>
-            <p>This Entire site was not created using a template, but instead was created using html, css, and javascript and has been worked on since Febuary 9th 2023.</p>
-        </div>
-        <div class="card-containertest">
-            <div class="cardb" id="cardbutton1">
-                <h3>Math Page</h3>
-                <p>Currently, this is an area I built to calculate the areas and circumferences of shapes. Later, I plan on adding more math conversions</p>
-            </div>
-            <div class="cardb" id="cardbutton2">
-                <h3>Portfolio</h3>
-                <p>This is my portfolio with information on skills and other details.</p>
-            </div>
-            <div class="cardb" id="cardbutton3">
-              <h3>Html Editor</h3>
-              <p>This is a previewer for html code</p>
-          </div>
-        </div>
+    <div class="title">
+        <h1 class="titlein">Welcome To Ethonic's Website</h1>
     </div>
-  </body>
+    <button id="scroll-button">Scroll Down</button>
+    <div class="mainarea">
+        <div class="container">
+            <div class="item">
+                <p>These are some simple tools for ultrakill. Currently, only the Image to Cyber Grind Pattern has released.</p>
+                <a href="Ultrakill/index.html">Ultrakill Tools</a>
+              </div>
+            <div class="item">
+              <p>I made a test window manager that can open, close, resize, and fullscreen windows but It barely works and is all bundled into a single html file.</p>
+              <a href="EthOS/index.html">Web Window Test</a>
+            </div>
+            <div class="item">
+              <p>This is my portfolio with information on skills and other details.</p>
+              <a href="portfolio/index.html">Portfolio Page</a>
+            </div>
+            <div class="item">
+              <p>Currently, this is an area I built to calculate the areas and circumferences of shapes. Later, I plan on adding more math conversions.</p>
+              <a href="math/index.html">Math Calculators</a>
+            </div>
+            <div class="item">
+              <p>This is a previewer for html code that I made while I was bored. It still doesn't work very well.</p>
+              <a href="code/html/index.html">HTML Coding Page</a>
+            </div>
+          </div>
+    </div>
+</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+
     <script>
-
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var popup = document.getElementById('popup');
-        var closeButton = document.getElementById('close-popup');
-        var body = document.body;
-      
-        popup.style.display = 'block';
-        body.classList.add('popup-open');
-      
-        closeButton.addEventListener('click', function() {
-          popup.style.display = 'none';
-          body.classList.remove('popup-open');
-        });
-      });
-      
-      
-
-      //var video = document.getElementsByTagName('video')[0];
-      //video.playbackRate = 0.5;
-
-        const myDiv = document.getElementById('cardbutton1');
-        myDiv.addEventListener('click', () => {
-          window.location.href = 'math/index.html';
-        });
-        const myDiv2 = document.getElementById('cardbutton2');
-        myDiv2.addEventListener('click', () => {
-          window.location.href = 'portfolio/index.html';
-        });
-        const myDiv3 = document.getElementById('cardbutton3');
-        myDiv3.addEventListener('click', () => {
-          window.location.href = 'code/html/index.html';
-        });
-
-
-
-      let audio = document.getElementById('audio');
-      let fadeoutTimer = null;
-
-      document.addEventListener('keydown', function(event) {
-        if (event.repeat) return;
-        if (event.keyCode === 49) { //1
-          playSound('D.wav'); //D4
-        } else if (event.keyCode === 50) { //2
-          playSound('F.wav'); //F4
-        } else if (event.keyCode === 51) { // 3
-          playSound('A.wav'); //A4
-        } else if (event.keyCode === 52) { //4
-          playSound('B.wav'); //B4
-        } else if (event.keyCode === 53) { //5
-          playSound('D2.wav'); //D5
-        }
-      });
-
-      document.addEventListener('keyup', function(event) {
-        if (event.keyCode === 49 || event.keyCode === 50 || event.keyCode === 51 || event.keyCode === 52 || event.keyCode === 53) { // 12345
-          fadeout();
-        }
-      });
-
-      function playSound(filename, pitch, loopTime) {
-        audio.src = filename;
-        audio.currentTime = 0;
-        audio.play();
-        audio.volume = 1;
-        let loopStart = 0
-        audio.loop = false;
-        audio.currentTime = Math.max(loopStart, 0.25); 
-      }
-
-      function fadeout() {
-        if (fadeoutTimer) return;
-        fadeoutTimer = setInterval(function() {
-          if (audio.volume > 0) {
-            audio.volume = 0.5;
-          } else {
-            audio.pause();
-            audio.currentTime = 0;
-            audio.loop = false;
-            clearInterval(fadeoutTimer);
-            fadeoutTimer = null;
-          }
-        }, 50);
-        const sequence = [2, 3, 4, 2, 3, 4, 2, 3, 4, 5, 4, 3, 4, 3, 2, 1, 1, 2, 3, 1];
-        let currentIndex = 0;
+        const myVideo = document.getElementById('myVideo');
+        const delaySeconds = 5; // Set delay time in seconds
         
-        document.addEventListener('keyup', function(event) {
-          if (event.keyCode === sequence[currentIndex]) {
-            currentIndex++;
-            if (currentIndex === sequence.length) {
-              console.log('Hello, world!');
-              currentIndex = 0;
-            }
-          } else {
-            currentIndex = 0;
-          }
+        setTimeout(function() {
+            var video = document.getElementById("my-video");
+            video.style.display = "block";
+            video.play();
+            setTimeout(function() {
+              video.style.opacity = 1;
+            }, 100);
+          }, 5000);
+          
+
+          var button = document.getElementById("scroll-button");
+
+        button.addEventListener("click", function() {
+        window.scrollBy({
+            top: window.innerHeight,
+            behavior: 'smooth'
+        });
         });
 
-      }
-      
-      
-      function sequenceHandler(callback) {
-        let sequenceKeys = [];
-        const sequence1 = '50,51,52,50,51,52,50,51,52,53,52,51,52,51,50,49,49,50,51,49';
-        const sequence2 = '51,52,53,52,51,50';
-        return event => {
-          sequenceKeys.push(event.keyCode);
-          if (sequenceKeys.toString().indexOf(sequence1) >= 0) {
-            sequenceKeys = [];
-            callback(event, 'sequence1');
-          } else if (sequenceKeys.toString().indexOf(sequence2) >= 0) {
-            sequenceKeys = [];
-            callback(event, 'sequence2');
-          }
-        };
-      }
-      
-      const handler = sequenceHandler((event, sequence) => {
-        console.log(`Custom ${sequence} sequence completed!`);
-      });
-      
-      window.addEventListener('keydown', handler);
-      
-    </script>
+      </script>
 </html>
