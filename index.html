@@ -101,40 +101,82 @@
             border-radius: 10px;
             margin: 10px auto;
           }
+          .lower {
+            position: absolute;
+            overflow: hidden;
+            overflow-x: hidden;
+            border-collapse: collapse;
+            align-self: center;
+            width: 100%;
+            height: 10%;
+            object-fit: cover;
+            color: white;
+
+            background:rgba(0, 0, 0, 0.171);
+            backdrop-filter: blur(50px);
+          }
+          .utterances-frame, .utterances {
+            width: 75%;
+            background-color: rgba(15, 15, 15, 0);
+            padding: 1%;
+            border-radius: 10px;
+            border-color: #fff;
+            border: 2px solid #fff;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease-in-out;
+            color: white;
+            margin: 19% auto;
+            font-size: 15px;
+          }
         </style>
     </head>
 <body>
-    <video id="myVideo" autoplay muted loop>
-	    <source src="bg.mp4" type="video/mp4">
+  <video id="myVideo" autoplay muted loop>
+	  <source src="bg.mp4" type="video/mp4">
 	</video>
-    <div class="title">
-        <h1 class="titlein">Welcome To Ethonic's Website</h1>
-    </div>
+  <div class="title">
+      <h1 class="titlein">Welcome To Ethonic's Website</h1>
+  </div>
     <button id="scroll-button">Scroll Down</button>
     <div class="mainarea">
-        <div class="container">
-            <div class="item">
-                <p>These are some simple tools for ultrakill. Currently, only the Image to Cyber Grind Pattern has released.</p>
-                <a href="Ultrakill/index.html">Ultrakill Tools</a>
-              </div>
-            <div class="item">
-              <p>I made a test window manager that can open, close, resize, and fullscreen windows but It barely works and is all bundled into a single html file.</p>
-              <a href="EthOS/index.html">Web Window Test</a>
-            </div>
-            <div class="item">
-              <p>This is my portfolio with information on skills and other details.</p>
-              <a href="portfolio/index.html">Portfolio Page</a>
-            </div>
-            <div class="item">
-              <p>Currently, this is an area I built to calculate the areas and circumferences of shapes. Later, I plan on adding more math conversions.</p>
-              <a href="math/index.html">Math Calculators</a>
-            </div>
-            <div class="item">
-              <p>This is a previewer for html code that I made while I was bored. It still doesn't work very well.</p>
-              <a href="code/html/index.html">HTML Coding Page</a>
-            </div>
+    <div class="container">
+        <div class="item">
+            <p>These are some simple tools for ultrakill. Currently, only the Image to Cyber Grind Pattern has released.</p>
+            <a href="Ultrakill/index.html">Ultrakill Tools</a>
           </div>
+        <div class="item">
+          <p>I made a test window manager that can open, close, resize, and fullscreen windows but It barely works and is all bundled into a single html file.</p>
+          <a href="EthOS/index.html">Web Window Test</a>
+        </div>
+        <div class="item">
+          <p>This is my portfolio with information on skills and other details.</p>
+          <a href="portfolio/index.html">Portfolio Page</a>
+        </div>
+        <div class="item">
+          <p>Currently, this is an area I built to calculate the areas and circumferences of shapes. Later, I plan on adding more math conversions.</p>
+          <a href="math/index.html">Math Calculators</a>
+        </div>
+        <div class="item">
+          <p>This is a previewer for html code that I made while I was bored. It still doesn't work very well.</p>
+          <a href="code/html/index.html">HTML Coding Page</a>
+        </div>
+
+      </div>
     </div>
+  </div>
+  <div class="lower">
+    <h1>Comments:</h1>
+    <div>
+      <script src="https://utteranc.es/client.js"
+        repo="EthonicDev/EthonicDev.github.io"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </div>
+  </div>
 </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
 
